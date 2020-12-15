@@ -1,6 +1,6 @@
 {
-    "name": "chuwei-client/web",
-    "description": "系统应用功能",
+    "name": "chuwei-client/oauth",
+    "description": "系统应用授权验证",
     "type": "library",
     "authors": [
         {
@@ -10,12 +10,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "ChuWei\\Client\\Web\\": "src/"
+            "ChuWei\\Client\\Oauth\\": "src/"
         }
     },
     "extra": {
         "branch-alias": {
-            "main-dev": "v1.0.0-dev"
+            "main-dev": "v1.1.0-dev"
         }
     },
     "license": "MIT",
