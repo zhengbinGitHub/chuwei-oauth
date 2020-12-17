@@ -26,13 +26,12 @@ class CwAppApiMiddleware
         if(!$token){
             return $this->returnMsg(0, '头部X-Auth-Token参数为空');
         }
-        $request->platform = request()->header('X-Auth-Platform');
         $request->appid = request()->header('X-Auth-Appid');
-        if(!$request->platform || !$request->appid){
-            return $this->returnMsg(0, '头部X-Auth-Platform／X-Auth-Appid参数为空');
+        if(!$request->appid){
+            return $this->returnMsg(0, '头部X-Auth-Appid参数为空');
         }
         try{
-            $appInfo = ApiApp::query()->where(['app_id' => $request->appid, 'platform' => $request->platform])->first(['tenant_id', 'app_id', 'app_secret']);
+            $appInfo = ApiApp::query()->where('app_id', $request->appid)->first(['tenant_id', 'app_id', 'app_secret']);
             if(!isset($appInfo->tenant_id)){
                 return $this->returnMsg(0, '应用信息为空');
             }

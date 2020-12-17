@@ -18,16 +18,9 @@ class ProxyOauthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('ChuWei\Client\Oauth\Controllers\Api\AuthTokenController');
-        $this->app->make('ChuWei\Client\Oauth\Controllers\Api\TestController');
         if (! $this->app->configurationIsCached()) {
             $this->mergeConfigFrom(__DIR__.'/../config/cwapp.php', 'cwapp');
         }
-
-        //注册应用
-        $this->app->singleton('chuwei-oauth', function($app){
-            return new ProxyOauthManager($app['config']);
-        });
     }
 
     /**
@@ -36,8 +29,6 @@ class ProxyOauthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->addMiddlewareAlias('cwapp-api.auth', CwAppApiMiddleware::class);
-
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
     }
 
     # 添加中间件的别名方法
@@ -50,15 +41,5 @@ class ProxyOauthServiceProvider extends ServiceProvider
         }
 
         return $router->middleware($name, $class);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['chuwei-oauth'];
     }
 }
