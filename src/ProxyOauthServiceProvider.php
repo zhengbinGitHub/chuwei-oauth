@@ -19,7 +19,7 @@ class ProxyOauthServiceProvider extends ServiceProvider
     public function register()
     {
         if (! $this->app->configurationIsCached()) {
-            $this->mergeConfigFrom(__DIR__.'/../config/cwapp.php', 'cwapp');
+            $this->mergeConfigFrom(__DIR__.'/../config/cwapp_api.php', 'cwapp_api');
         }
     }
 
